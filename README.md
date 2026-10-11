@@ -1,0 +1,51 @@
+# Campus Event Explorer
+
+## Overview
+
+Campus Event Explorer is an Android application built with Kotlin and Jetpack Compose. It allows users to browse campus events, search by event title or category, view event details, and share event information with other applications.
+
+## Features
+
+- Displays eight sample campus events in a LazyColumn.
+- Searches events by title or category as the user types.
+- Uses stable event IDs as LazyColumn keys.
+- Navigates between the event list and detail screens using type-safe Navigation Compose routes.
+- Displays an unavailable-event message for invalid event IDs.
+- Shares event information through Android's system share sheet.
+- Preserves the search query and navigation state during rotation.
+
+## How it's built
+
+The application uses a `CampusEvent` data class to represent each event. Navigation passes only the event ID rather than the complete event object. The detail destination retrieves the corresponding event from the event collection.
+
+`EventNavigation` owns the search state using `rememberSaveable`. The visible event list is derived from the query rather than stored as a separate mutable list.
+
+The screen composables receive their data and callbacks as parameters. Navigation is handled outside the screen composables, keeping UI code separate from navigation logic.
+
+The Share event action uses an implicit `ACTION_SEND` intent and `Intent.createChooser()` to allow the user to select another application.
+
+## Screenshots
+
+### Event List
+
+
+### Event Details
+
+
+## Technologies
+
+- Kotlin
+- Jetpack Compose
+- Material 3
+- Navigation Compose
+- Kotlin Serialization
+
+## AI and Collaboration Disclosure
+
+I used Generative AI (Claude) to help understand the assignment requirements, understand some of the Android concepts used in the implementation and help resolve issues encountered during implementation.
+
+## Running the Application
+
+1. Open the project in Android Studio.
+2. Allow Gradle to sync.
+3. Run the application on an Android emulator or compatible device. 
