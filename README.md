@@ -28,9 +28,27 @@ The Share event action uses an implicit `ACTION_SEND` intent and `Intent.createC
 
 ### Event List
 
+The main screen displays the available campus events, including their categories, locations, and times.
+
+![Event List](Screenshots/event-list.png)
 
 ### Event Details
 
+Selecting an event opens a detail screen with more information about the event.
+
+![Event Details](Screenshots/event-detail.png)
+
+### Event Search
+
+Users can search for events by title or category. This example shows the results for a search for "Technology."
+
+![Event Search](Screenshots/event-search.png)
+
+### Share Event
+
+Users can share event information using Android's share chooser.
+
+![Event Share](Screenshots/event-share.png)
 
 ## Technologies
 
