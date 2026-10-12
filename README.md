@@ -58,6 +58,31 @@ Users can share event information using Android's share chooser.
 - Navigation Compose
 - Kotlin Serialization
 
+## Implementation Questions
+
+### 1. Why does the route contain an event ID instead of the complete event object?
+
+The route passes only the event ID because it uniquely identifies the event. The detail screen uses that ID to find the event in the existing collection. This keeps navigation arguments simple and avoids passing the entire object between screens.
+
+### 2. Which composable owns the search state?
+
+`EventNavigation` owns the search state using `rememberSaveable`. It passes the current query and the `onQueryChange` callback to `EventListScreen`.
+
+### 3. Why does the search value use `rememberSaveable`?
+
+`rememberSaveable` preserves the search text when the activity is recreated, such as during a device rotation. This allows the user to return to the list without losing their search.
+
+### 4. What happens to the back stack when an event is selected?
+
+When an event is selected, the app navigates to `EventDetail` with the event ID. The detail destination is placed on top of the event list in the navigation back stack. Pressing system Back or the app-bar Up button returns to the list.
+
+### 5. How does the UI request navigation without directly accessing the NavController?
+
+The screen composables receive callback functions, such as `onEventSelected` and `onBack`. The navigation layer provides these callbacks and performs the actual navigation, keeping the UI screens separate from navigation logic.
+
+### 6. What makes the Share action an implicit intent?
+
+The Share action uses `Intent.ACTION_SEND` with a text MIME type and the event information. It uses `Intent.createChooser()` to let Android display available apps that can receive the shared text, rather than selecting a specific app.
 ## AI and Collaboration Disclosure
 
 I used Generative AI (Claude) to help understand the assignment requirements, understand some of the Android concepts used in the implementation and help resolve issues encountered during implementation.
